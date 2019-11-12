@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Back-end') {
             agent {
-                Jen_Slave(docker { image 'maven:3-alpine' })
+                label 'Jen_Slave' = docker { image 'maven:3-alpine' }
             }
             
             steps {
