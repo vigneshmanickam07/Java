@@ -1,24 +1,25 @@
 pipeline {
-   agent { 
-               label 'docker'
-            }
+   agent any
    parameters {
-        string(name: 'ENV', defaultValue: 'docker', description: 'How should I greet the world?')
+        choice(choices: ['dev', 'prod'], description: 'What AWS region?', name: 'region')
     }
-    stages {
+   
+   stages {
         stage('Build') {
-           agent { 
-                label 'master'
-            }
+           
             steps {
                 echo 'Building..'
                  sh 'mvn package'
+                 script {
+              timeout(time: 10, unit: 'MINUTES') {
+                input(id: "Deploy Gate", message: "Deploy ${params.project_name}?", ok: 'Deploy')
+              }
             }
         }
-       
+        }
    
         stage('Deploy') {
-            
+           
             steps {
                 
                 sh 'sudo apt update -y'
