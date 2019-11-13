@@ -9,12 +9,12 @@ pipeline {
          stage('push to jfrog') { 
              steps {
                 rtUpload (
-                serverId: 'jfrog',
+                serverId: 'vitecarti',
                 spec: '''{
                     "files": [
                 {
                 "pattern": "target/*.war",
-                "target": "java_app/"
+                "target": "Vignesh/"
                 }
          ]
     }''',
