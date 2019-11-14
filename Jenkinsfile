@@ -14,7 +14,7 @@ pipeline {
                     "files": [
                 {
                 "pattern": "target/*.war",
-                "target": "Vignesh/"
+                "target": "Vitec_Repo/"
                 }
          ]
     }''',
